@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端面试</title>
+  </head>
+  <script src="./fiber.js"></script>
+  <style>
+    #root {
+      width: 100px;
+      height: 100px;
+      background: #f00;
+      transform: translateX();
+    }
+  </style>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script>
+    const root = document.getElementById("root");
+    let startTime;
+    function animate(time) {
+      console.log("动画开始时间=", time + "毫秒");
+      if (!startTime) {
+        startTime = time;
+      }
+      // 计算每次执行的时间差
+      // console.log(time, time - startTime);
+      root.style.transform = "translateX(" + time * 0.01 + "px)";
+      // 循环执行
+      if (time < 100) {
+        window.requestAnimationFrame(animate);
+      }
+    }
+    // 浏览器在下一次重绘执行会执行回调函数动画
+    // window.requestAnimationFrame(animate);
+
+    // requestIdleCallback 浏览器空闲时回调，ios浏览器不支持
+    function createWorks() {
+      const works = [];
+      let i = 0;
+      while (i < 5) {
+        works.push(() => console.log("任务" + works.length));
+        i++;
+      }
+      return works;
+    }
+    const works = createWorks();
+    // 执行任务
+    function task(deadline) {
+      // deadline 最后期限，remaining 剩余
+      console.log("浏览器剩余空闲时间：", deadline.timeRemaining());
+      // 如果有剩余空闲时间
+      if (deadline.timeRemaining() > 0 && works.length > 0) {
+        const work = works.shift();
+        work();
+        window.requestIdleCallback(task);
+      }
+    }
+    // 浏览器在忙的时候没一帧最多消耗时间16ms,在空闲时每一帧最多50ms
+    window.requestIdleCallback(task);
+  </script>
+</html>
