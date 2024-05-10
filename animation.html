@@ -4,18 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>requestAnimationFrame 使用场景</title>
+    <link href="./anim.css" rel="stylesheet"></link>
   </head>
-  <style>
-    #scrollBtn3 {
-      position: fixed;
-      right: 10px;
-      top: 20px;
-      z-index: 10;
-    }
-  </style>
   <body>
     <div id="list">
       <div id="item">
+        
         requestAnimationFrame 请求动画帧 它是一个浏览器的宏任务
         requestAnimationFrame的用法与settimeout很相似，只是不需要设置时间间隔而已。requestAnimationFrame使用一个回调函数作为参数，这个回调函数会在浏览器重绘之前调用。它返回一个整数，表示定时器的编号，这个值可以传递给cancelAnimationFrame用于取消这个函数的执行
         requestAnimationFrame特点
@@ -37,8 +31,16 @@
     <button id="scrollBtn">滚动到顶部</button>
     <button id="scrollBtn2">克隆</button>
     <button id="scrollBtn3">滚动到底部部</button>
+    <script src="./fiber.js" async></script>
+        <script src="./test.js" defer></script>
   </body>
   <script>
+    window.addEventListener("DOMContentLoaded", (e) => {
+      console.log("DOMContentLoaded~", e);
+    });
+    window.addEventListener("load", (e) => {
+      console.log("load~", e);
+    });
     // 1、平滑动画
     let animationId = null,
       t = 0;

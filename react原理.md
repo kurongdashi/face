@@ -9,8 +9,9 @@
 //   @babel/plugin-transform-react-jsx 将jsx 转换成React.createElement({})
 const element = () => <div></div>;
 ```
-
-## schedule 调节任务执行
+## react 15
+- 递归遍历dom，导致js线程占用，导致卡顿，react16新增schedule解决问题
+## react 16 schedule 调节任务执行
 
 - 帧的概念：浏览器每秒钟 60 帧（页面绘制），是标准流程，一帧大约 16.6ms,（浏览器空闲时一帧是 50ms）当一帧执行完后，如果 js 还占用线程，则页面渲染会卡顿
 - frame start--> input event--> requestAnimationFrame-->渲染任务--> requestIdleCallback（渲染完成，会通知浏览器空闲啦，可以执行其他任务了）
@@ -52,7 +53,7 @@ channel.port2.onmessage = function (msg) {
 ```
 
 - reconciler 调和阶段，diff 算法阶段，将需要做变更的操作记录到一个地方,这个阶段可以终止和恢复
-- commit 执行上面所有需要执行的操作，必须同步执行，不能中断
+- commit （renderer 过程） 执行上面所有需要执行的操作，必须同步执行，不能中断
 
 ## react fiber 数据结构（任务单元）
 

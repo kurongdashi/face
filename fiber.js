@@ -1,5 +1,5 @@
 /** 模拟fiber运行***/
-
+console.log("fiber run1");
 const channel = new MessageChannel();
 /**
  * requestAnimationFrame：
@@ -40,3 +40,4 @@ window.requestIdleCallback = function (callback, options) {
     channel.port1.postMessage("port1");
   });
 };
+console.log("fiber run2");

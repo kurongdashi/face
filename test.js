@@ -2,6 +2,7 @@
  * let arr=[1,2,3] 实现 从前添加元素的方法
  * arr.myUnshift(3,4,5) // 3,4,5,1,2,3
  */
+console.log("defer run1");
 let arr1 = [1, 2, 3];
 Array.prototype.myUnshift = function () {
   let i = 0,
